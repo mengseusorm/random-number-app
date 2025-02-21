@@ -36,14 +36,8 @@ dependencies:
   cupertino_icons: ^1.0.8
   http: ^1.3.0 
   font_awesome_flutter: ^10.8.0
-<<<<<<< HEAD
-  get: ^4.7.1
-  getwidget: ^5.0.0
-=======
-  get: ^4.7.2
   # get: ^4.7.1
->>>>>>> 2784acc57b146501322138807be48a71b46fe8d0
-  
+  getwidget: ^5.0.0
 dev_dependencies:
   flutter_test:
     sdk: flutter
