@@ -1,5 +1,8 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart'; 
+import 'package:learn_flutter_1/views/page/history.dart';
+import 'package:learn_flutter_1/views/page/setting.dart';
 
 class Randomnumberpage extends StatefulWidget {
   @override
@@ -16,12 +19,7 @@ class _RandomnumberpageState extends State<Randomnumberpage> {
         style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
       ),
     ),
-    Center(
-      child: Text(
-        "Hello2",
-        style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Colors.red),
-      ),
-    ),
+    History()
   ];
 
   void _navbar(int index) {
@@ -33,12 +31,20 @@ class _RandomnumberpageState extends State<Randomnumberpage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
         backgroundColor: Colors.deepPurple,
         title: Text(
-          "TEST",
+          "Generate Random Number",
           style: TextStyle(color: Colors.white),
         ),
+        leading: IconButton( 
+          onPressed: () => { 
+            Get.to(() =>SettingsPage2())
+          }, 
+          icon: Icon(Icons.settings),
+          color: Colors.white,
+          ),
       ),
       body: pages[_page], // Make sure this updates correctly
       bottomNavigationBar: CurvedNavigationBar(
