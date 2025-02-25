@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart'; 
 import 'package:getwidget/getwidget.dart';
-import 'package:learn_flutter_1/views/randomNumberPage.dart';
+import 'package:random_number_app/views/page/randomNumberPage.dart';
 import 'package:get/get.dart'; 
 
 void main(){
