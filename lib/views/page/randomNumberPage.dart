@@ -15,9 +15,7 @@ class _RandomnumberpageState extends State<Randomnumberpage> {
   int _page = 0;
 
   final List<Widget> pages = [
-    Text(
-      "hello"
-    ),
+    Home(),
     History(),
   ];
 
