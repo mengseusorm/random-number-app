@@ -1,9 +1,12 @@
 import 'package:get/get.dart';
 
-class ButtonController extends GetxController {
-var isActive = false.obs; // Observable variable
+class OptionContoller extends GetxController { 
+  RxList<bool> selectedOptions = [true, false, false].obs;
+  void toggleOption(int index) {
+    // selectedOptions[index] = !selectedOptions[index];
 
-  void toggleActive() {
-    isActive.value = !isActive.value;
+      for (int i = 0; i < selectedOptions.length; i++) {
+        selectedOptions[i] = i == index;
+      }
   }
 }
