@@ -1,48 +1,46 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:random_number_app/controller/randomController.dart';
+import 'package:group_button/group_button.dart';
 
 class Home extends StatelessWidget {
   final OptionContoller controller = Get.put(OptionContoller());
 
-  List<Widget> fruits = <Widget>[
-    Text('Apple'),
-    Text('Banana'),
-    Text('Orange')
+  List<Widget> optionRandomNumbers = <Widget>[
+    Text('Single'),
+    Text('Multiple'),
+    Text('Custorm')
   ];
   bool vertical = false;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center( 
-        child: SingleChildScrollView(
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text("selected"),
-              Padding(
-                padding: EdgeInsets.all(10),
-                child: Obx(() => ToggleButtons(
-                  direction: vertical ? Axis.vertical : Axis.horizontal,
-                  isSelected: controller.selectedOptions,
-                  onPressed: (index) => {
-                    controller.toggleOption(index)
-                  },
-                  borderRadius: const BorderRadius.all(Radius.circular(8)),
-                  selectedBorderColor: Colors.red[700],
-                  selectedColor: Colors.white,
-                  fillColor: Colors.red[200],
-                  color: Colors.red[400],
-                  constraints: const BoxConstraints(minHeight: 40.0, minWidth: 80.0),
-                  children: fruits,
-                )),
-              )
-            ],
-          ),
+      body: Container(
+        padding: EdgeInsets.all(10),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [  
+            Center(
+              child: GroupButton( 
+                buttons: [
+                  "Single",
+                  "Multiple",
+                  "Custom",
+                ],
+              ), 
+            ) ,
+            Center(
+              
+            )
+            // Expanded(
+            //   child: GroupButton(
+            //     buttons: ["Button 1", "Button 2", "Button 3"],
+            //   ),
+            // )
+          ],
         ),
-      ),
+      )
     );
   }
 }
