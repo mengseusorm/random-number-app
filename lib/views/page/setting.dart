@@ -1,14 +1,3 @@
-// import 'package:flutter/material.dart'; 
-
-// class Setting extends StatelessWidget {
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       appBar: AppBar(title: Text("Settings")),
-//       body: Center(child: Text("Settings Page")),
-//     );
-//   }
-// }
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -46,7 +35,8 @@ class _SettingsPage2State extends State<SettingsPage2> {
                               setState(() {
                                 _isDark = value;
                               });
-                            })),
+                        })
+                      ),
                     const _CustomListTile(
                         title: "Notifications",
                         icon: Icons.notifications_none_rounded),
