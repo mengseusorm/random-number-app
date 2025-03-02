@@ -1,7 +1,10 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:random_number_app/controller/randomController.dart';
 import 'package:group_button/group_button.dart';
+import 'package:toggle_switch/toggle_switch.dart';
 
 class Home extends StatelessWidget {
   final Randomcontroller controller = Get.put(Randomcontroller());
@@ -22,31 +25,69 @@ class Home extends StatelessWidget {
                 "Choose Options Number generates",
               ),
               SizedBox(height: 10),
-              Center(
-                child: GroupButton(
-                  buttons: ['Single', 'Custom'],
-                  options: GroupButtonOptions(
-                      buttonWidth: 180,
-                      buttonHeight: 50,
-                      borderRadius: BorderRadius.all(Radius.circular(5)),
-                      unselectedColor: Color(0xFFEDEDED),
-                      selectedColor: Color(0XFF745982)),
-                ),
-              ),
-              SizedBox(height: 10),
+             Card(
+                color:Color(0xFFFFFFFF),
+                elevation: 1,
+                margin: EdgeInsets.zero,  
+                shape: const RoundedRectangleBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(5)), 
+                ),child: Padding( 
+                  padding: EdgeInsets.all(10), 
+                    child: Container(
+                      width: double.infinity, 
+                      child: Center( 
+                        child: ToggleSwitch( 
+                          minWidth: double.infinity, 
+                          cornerRadius: 5.0,
+                          activeBgColors: [[Color(0xFF5F33E1)!], [Color(0xFF5F33E1)!]],
+                          activeFgColor: Colors.white,
+                          inactiveBgColor: Color(0xFFEDE8FF),
+                          inactiveFgColor: Color(0xFF5F33E1),
+                          initialLabelIndex: 0,
+                          totalSwitches: 2,
+                          labels: ['Single', 'Custom'],
+                          radiusStyle: true,
+                          onToggle: (index) {
+                            print('switched to: $index');
+                          },
+                        ),
+                      ),
+                    ),
+                ), 
+              ), 
+              SizedBox(height: 10),     
               Text("Enable Duplicate Number"),
-              SizedBox(height: 10),
-               Center(
-                child: GroupButton(
-                  buttons: ['None', 'Duplicate'],
-                  options: GroupButtonOptions(
-                      buttonWidth: 180,
-                      buttonHeight: 50,
-                      borderRadius: BorderRadius.all(Radius.circular(5)),
-                      unselectedColor: Color(0xFFEDEDED),
-                      selectedColor: Color(0XFF745982)),
-                ),
-              ),
+              SizedBox(height: 10), 
+              Card(
+                color:Color(0xFFFFFFFF),
+                elevation: 1,
+                margin: EdgeInsets.zero,  
+                shape: const RoundedRectangleBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(5))
+                ),child: Padding(
+                  padding: EdgeInsets.all(10), 
+                    child: Container(
+                      width: double.infinity, 
+                      child: Center( 
+                        child: ToggleSwitch( 
+                          minWidth: double.infinity, 
+                          cornerRadius: 5.0,
+                          activeBgColors: [[Color(0xFF5F33E1)!],[Color(0xFF5F33E1)!]],
+                          activeFgColor: Colors.white,
+                          inactiveBgColor: Color(0xFFEDE8FF),
+                          inactiveFgColor: Color(0xFF5F33E1),
+                          initialLabelIndex: 0,
+                          totalSwitches: 2,
+                          labels: ['None', 'Duplicate'],
+                          radiusStyle: true,
+                          onToggle: (index) {
+                            print('switched to: $index');
+                          },
+                        ),
+                      ),
+                    ),
+                ), 
+              ), 
               SizedBox(height: 10),  
               Text("How many numbers?"),
               SizedBox(height: 10), 
@@ -58,13 +99,23 @@ class Home extends StatelessWidget {
                         controller: controller.min,
                         textAlign: TextAlign.center,
                         decoration: InputDecoration(
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(5))
+                           border: OutlineInputBorder(
+                            borderRadius: BorderRadius.all(Radius.circular(5)), 
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderSide: BorderSide(color: Color(0xFF5F33E1), width: 2)
+                          ),
+                          enabledBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.all(Radius.circular(5)),
+                            borderSide: BorderSide(color: Color(0xFF5F33E1), width: 1),  // Border color when enabled
                           ),
                           filled: true,
                           fillColor: Colors.white,  
-                          label: Text("Minimum")
+                          label: Text("Minimum"),  
                         ), 
+                        style: TextStyle(
+                          fontSize: 17
+                        ),
                       ),  
                     ),
                     SizedBox(width: 10,),
@@ -74,13 +125,20 @@ class Home extends StatelessWidget {
                         textAlign: TextAlign.center,
                         decoration: InputDecoration(
                           border: OutlineInputBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(5))
+                            borderRadius: BorderRadius.all(Radius.circular(5)), 
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderSide: BorderSide(color: Color(0xFF5F33E1), width: 2)
+                          ),
+                          enabledBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.all(Radius.circular(5)),
+                            borderSide: BorderSide(color: Color(0xFF5F33E1), width: 1),  // Border color when enabled
                           ),
                           filled: true,
-                          fillColor: Colors.white,  
-                          label: Text("Maximum"), 
-                        ),  
-                      ),  
+                          fillColor: Colors.white,
+                          label: Text("Maximum"),
+                        ),   
+                      ), 
                     ), 
                   ],
                 ),
@@ -100,7 +158,7 @@ class Home extends StatelessWidget {
               Center(
                   child: Container(
                 decoration: BoxDecoration(
-                  color: Color(0XFF745982),
+                  color: Color(0xFF5F33E1),
                   borderRadius: BorderRadius.circular(5),
                 ),
                 width: double.infinity,

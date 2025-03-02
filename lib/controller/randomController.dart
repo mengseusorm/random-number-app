@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class Randomcontroller extends GetxController { 
+
+  bool isButton1Active = true;
   final min = TextEditingController(text: "1"); 
   final max = TextEditingController(text: "100");
 

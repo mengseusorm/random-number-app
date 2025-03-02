@@ -34,9 +34,12 @@ class _RandomnumberpageState extends State<Randomnumberpage> {
     return Scaffold(
       backgroundColor: Color(0xFFFFFFFF),
       appBar: AppBar(
-        backgroundColor: Color(0XFF745982),
+        backgroundColor: Color(0xFF5F33E1),
         title: Text(
           "Generate Number Pro", 
+          style: TextStyle(
+            color: Colors.white
+          ),
         ), 
         actions:[
           IconButton(
@@ -51,7 +54,7 @@ class _RandomnumberpageState extends State<Randomnumberpage> {
       body: pages[_page], // Make sure this updates correctly
       bottomNavigationBar: CurvedNavigationBar(
         backgroundColor: Colors.transparent,
-        color: Color(0XFF745982),
+        color: Color(0xFF5F33E1),
         index: _page,
         onTap: _navbar,
         items: [
