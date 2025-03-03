@@ -1,14 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class SettingsPage2 extends StatefulWidget {
-  const SettingsPage2({Key? key}) : super(key: key);
-
-  @override
-  State<SettingsPage2> createState() => _SettingsPage2State();
-}
-
-class _SettingsPage2State extends State<SettingsPage2> {
+class Setting_page extends StatelessWidget {
   bool _isDark = false;
   @override
   Widget build(BuildContext context) {
@@ -32,47 +25,16 @@ class _SettingsPage2State extends State<SettingsPage2> {
                         trailing: Switch(
                             value: _isDark,
                             onChanged: (value) {
-                              setState(() {
-                                _isDark = value;
-                              });
-                        })
-                      ),
-                    const _CustomListTile(
-                        title: "Notifications",
-                        icon: Icons.notifications_none_rounded),
-                    const _CustomListTile(
-                        title: "Security Status",
-                        icon: CupertinoIcons.lock_shield),
+                              _isDark = value;
+                            })),
+                    _CustomListTile(
+                        title: "Rate My App",
+                        icon: Icons.star
+                        
+                        ),
                   ],
                 ),
                 const Divider(),
-                const _SingleSection(
-                  title: "Organization",
-                  children: [
-                    _CustomListTile(
-                        title: "Profile", icon: Icons.person_outline_rounded),
-                    _CustomListTile(
-                        title: "Messaging", icon: Icons.message_outlined),
-                    _CustomListTile(
-                        title: "Calling", icon: Icons.phone_outlined),
-                    _CustomListTile(
-                        title: "People", icon: Icons.contacts_outlined),
-                    _CustomListTile(
-                        title: "Calendar", icon: Icons.calendar_today_rounded)
-                  ],
-                ),
-                const Divider(),
-                const _SingleSection(
-                  children: [
-                    _CustomListTile(
-                        title: "Help & Feedback",
-                        icon: Icons.help_outline_rounded),
-                    _CustomListTile(
-                        title: "About", icon: Icons.info_outline_rounded),
-                    _CustomListTile(
-                        title: "Sign out", icon: Icons.exit_to_app_rounded),
-                  ],
-                ),
               ],
             ),
           ),

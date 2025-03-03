@@ -1,9 +1,7 @@
-import 'dart:ffi';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:random_number_app/controller/randomController.dart';
-import 'package:group_button/group_button.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:random_number_app/controller/randomController.dart'; 
 import 'package:toggle_switch/toggle_switch.dart';
 
 class Home extends StatelessWidget {
@@ -22,7 +20,7 @@ class Home extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                "Choose Options Number generates",
+                "List Number",
               ),
               SizedBox(height: 10),
              Card(
@@ -57,6 +55,39 @@ class Home extends StatelessWidget {
               ), 
               SizedBox(height: 10),     
               Text("Enable Duplicate Number"),
+              SizedBox(height: 10), 
+              Card(
+                color:Color(0xFFFFFFFF),
+                elevation: 1,
+                margin: EdgeInsets.zero,  
+                shape: const RoundedRectangleBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(5))
+                ),child: Padding(
+                  padding: EdgeInsets.all(10), 
+                    child: Container(
+                      width: double.infinity, 
+                      child: Center( 
+                        child: ToggleSwitch( 
+                          minWidth: double.infinity, 
+                          cornerRadius: 5.0,
+                          activeBgColors: [[Color(0xFF5F33E1)!],[Color(0xFF5F33E1)!]],
+                          activeFgColor: Colors.white,
+                          inactiveBgColor: Color(0xFFEDE8FF),
+                          inactiveFgColor: Color(0xFF5F33E1),
+                          initialLabelIndex: 0,
+                          totalSwitches: 3,
+                          labels: ['None', 'ASC','DESC'],
+                          radiusStyle: true,
+                          onToggle: (index) {
+                            print('switched to: $index');
+                          },
+                        ),
+                      ),
+                    ),
+                ), 
+              ),  
+              SizedBox(height: 10),     
+              Text("Sort The Number"),
               SizedBox(height: 10), 
               Card(
                 color:Color(0xFFFFFFFF),
@@ -149,7 +180,9 @@ class Home extends StatelessWidget {
                   children: [
                     Obx(() => Text(
                       controller.result.value,
-                      style: TextStyle(fontSize: 90), 
+                      style: GoogleFonts.poppins(
+                        fontSize: 90,
+                      ), 
                     ))
                   ]
                 ), 
