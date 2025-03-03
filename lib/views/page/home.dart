@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -6,6 +7,7 @@ import 'package:toggle_switch/toggle_switch.dart';
 
 class Home extends StatelessWidget {
   final Randomcontroller controller = Get.put(Randomcontroller());
+  
   
   @override
   Widget build(BuildContext context) {
@@ -34,25 +36,38 @@ class Home extends StatelessWidget {
                     child: Container(
                       width: double.infinity, 
                       child: Center( 
-                        child: ToggleSwitch( 
-                          minWidth: double.infinity, 
-                          cornerRadius: 5.0,
-                          activeBgColors: [[Color(0xFF5F33E1)!], [Color(0xFF5F33E1)!]],
-                          activeFgColor: Colors.white,
-                          inactiveBgColor: Color(0xFFEDE8FF),
-                          inactiveFgColor: Color(0xFF5F33E1),
-                          initialLabelIndex: 0,
-                          totalSwitches: 2,
-                          labels: ['Single', 'Custom'],
-                          radiusStyle: true,
-                          onToggle: (index) {
-                            print('switched to: $index');
-                          },
-                        ),
+                        child: Obx(() => 
+                          ToggleSwitch( 
+                            minWidth: double.infinity, 
+                            cornerRadius: 5.0,
+                            activeBgColor: [Color(0xFF5F33E1)],
+                            activeFgColor: Colors.white,
+                            inactiveBgColor: Color(0xFFEDE8FF),
+                            inactiveFgColor: Color(0xFF5F33E1),
+                            initialLabelIndex: controller.listNumberActiveIcon.value,
+                            totalSwitches: 2,
+                            labels: ['Single Number', 'Custom'],
+                            radiusStyle: true,
+                            customIcons: [
+                              Icon(
+                                CupertinoIcons.circle_fill,
+                                color: controller.listNumberActiveIcon.value == 0 ? Colors.white : Color(0xFF5F33E1),
+                              ),
+                              Icon(
+                                CupertinoIcons.gear_alt_fill,
+                                color: controller.listNumberActiveIcon.value == 1 ? Colors.white : Color(0xFF5F33E1),
+                              ) 
+                            ],
+                            onToggle: (index) { 
+                              controller.updatelistNumberActiveIcon(index); 
+                            },
+                          )
+                        )  
                       ),
                     ),
                 ), 
-              ), 
+              ),  
+          // enalbe duplicate number
               SizedBox(height: 10),     
               Text("Enable Duplicate Number"),
               SizedBox(height: 10), 
@@ -67,27 +82,40 @@ class Home extends StatelessWidget {
                     child: Container(
                       width: double.infinity, 
                       child: Center( 
-                        child: ToggleSwitch( 
-                          minWidth: double.infinity, 
-                          cornerRadius: 5.0,
-                          activeBgColors: [[Color(0xFF5F33E1)!],[Color(0xFF5F33E1)!]],
-                          activeFgColor: Colors.white,
-                          inactiveBgColor: Color(0xFFEDE8FF),
-                          inactiveFgColor: Color(0xFF5F33E1),
-                          initialLabelIndex: 0,
-                          totalSwitches: 3,
-                          labels: ['None', 'ASC','DESC'],
-                          radiusStyle: true,
-                          onToggle: (index) {
-                            print('switched to: $index');
-                          },
-                        ),
+                        child: Obx(() => 
+                          ToggleSwitch( 
+                            minWidth: double.infinity, 
+                            cornerRadius: 5.0,
+                            activeBgColor: [Color(0xFF5F33E1)],
+                            activeFgColor: Colors.white,
+                            inactiveBgColor: Color(0xFFEDE8FF),
+                            inactiveFgColor: Color(0xFF5F33E1),
+                            initialLabelIndex: controller.enableDuplicateNumber.value,
+                            totalSwitches: 2,
+                            labels: ['None', 'Duplicate Number'],
+                            radiusStyle: true,
+                            customIcons: [ 
+                              Icon(
+                                CupertinoIcons.nosign,
+                                color: controller.enableDuplicateNumber == 0 ? Colors.white : Color(0xFF5F33E1),
+                              ),
+                              Icon(
+                                CupertinoIcons.square_on_square,
+                                color: controller.enableDuplicateNumber == 1 ? Colors.white : Color(0xFF5F33E1),
+                              ), 
+                            ],
+                            onToggle: (index) { 
+                              controller.updateEnableDuplicateNumber(index);
+                            },
+                          ),
+                        ) 
                       ),
                     ),
                 ), 
-              ),  
+              ), 
+              // short number
               SizedBox(height: 10),     
-              Text("Sort The Number"),
+              Text("Sort Number"),
               SizedBox(height: 10), 
               Card(
                 color:Color(0xFFFFFFFF),
@@ -103,14 +131,14 @@ class Home extends StatelessWidget {
                         child: ToggleSwitch( 
                           minWidth: double.infinity, 
                           cornerRadius: 5.0,
-                          activeBgColors: [[Color(0xFF5F33E1)!],[Color(0xFF5F33E1)!]],
+                          activeBgColor: [Color(0xFF5F33E1)],
                           activeFgColor: Colors.white,
                           inactiveBgColor: Color(0xFFEDE8FF),
                           inactiveFgColor: Color(0xFF5F33E1),
                           initialLabelIndex: 0,
-                          totalSwitches: 2,
-                          labels: ['None', 'Duplicate'],
-                          radiusStyle: true,
+                          totalSwitches: 3,
+                          labels: ['None', 'ASC','DESC'],
+                          // radiusStyle: true,
                           onToggle: (index) {
                             print('switched to: $index');
                           },
@@ -118,7 +146,7 @@ class Home extends StatelessWidget {
                       ),
                     ),
                 ), 
-              ), 
+              ),   
               SizedBox(height: 10),  
               Text("How many numbers?"),
               SizedBox(height: 10), 
@@ -180,7 +208,7 @@ class Home extends StatelessWidget {
                   children: [
                     Obx(() => Text(
                       controller.result.value,
-                      style: GoogleFonts.poppins(
+                      style: GoogleFonts.mandali(
                         fontSize: 90,
                       ), 
                     ))

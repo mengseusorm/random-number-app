@@ -35,7 +35,7 @@ class _RandomnumberpageState extends State<Randomnumberpage> {
         backgroundColor: Color(0xFF5F33E1), 
         title: Text(
           "Generate Number Pro",  
-          style: GoogleFonts.poppins(
+          style: GoogleFonts.sora(
             color: Colors.white
           ),
         ),  
