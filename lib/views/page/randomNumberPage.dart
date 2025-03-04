@@ -1,4 +1,5 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart'; 
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -18,6 +19,7 @@ class _RandomnumberpageState extends State<Randomnumberpage> {
   final List<Widget> pages = [
     Home(),
     History(),
+    Text("Setting"),     
     Text("Setting"),     
   ];
 
@@ -42,10 +44,10 @@ class _RandomnumberpageState extends State<Randomnumberpage> {
         centerTitle: true,
         leading: IconButton(
           onPressed: () => {
-            controller.setting()
+            controller.refresh()
           },
           icon: Icon(
-            Icons.settings
+            Icons.restart_alt
           ),
           color: Colors.white,
         ),
@@ -58,15 +60,19 @@ class _RandomnumberpageState extends State<Randomnumberpage> {
           onTap: _navbar,
           items: [
             Icon(
-              Icons.home_outlined ,
+              Icons.home,
               color: Colors.white, 
             ),
             Icon(
-              Icons.history_outlined,
+              Icons.history,
               color: Colors.white, 
             ),
             Icon(
-              Icons.share_outlined,
+              Icons.share,
+              color: Colors.white, 
+            ), 
+            Icon(
+              Icons.settings,
               color: Colors.white, 
             ), 
           ],
