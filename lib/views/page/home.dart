@@ -24,49 +24,32 @@ class Home extends StatelessWidget {
               Text(
                 "List Number",
               ),
-              SizedBox(height: 10),
-             Card(
+              SizedBox(height: 10),  
+              Card(
                 color:Color(0xFFFFFFFF),
                 elevation: 1,
                 margin: EdgeInsets.zero,  
                 shape: const RoundedRectangleBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(5)), 
-                ),child: Padding( 
-                  padding: EdgeInsets.all(10), 
-                    child: Container(
-                      width: double.infinity, 
-                      child: Center( 
-                        child: Obx(() => 
-                          ToggleSwitch( 
-                            minWidth: double.infinity, 
-                            cornerRadius: 5.0,
-                            activeBgColor: [Color(0xFF5F33E1)],
-                            activeFgColor: Colors.white,
-                            inactiveBgColor: Color(0xFFEDE8FF),
-                            inactiveFgColor: Color(0xFF5F33E1),
-                            initialLabelIndex: controller.listNumberActiveIcon.value,
-                            totalSwitches: 2,
-                            labels: ['Single Number', 'Custom'],
-                            radiusStyle: true,
-                            customIcons: [
-                              Icon(
-                                CupertinoIcons.circle_fill,
-                                color: controller.listNumberActiveIcon.value == 0 ? Colors.white : Color(0xFF5F33E1),
-                              ),
-                              Icon(
-                                CupertinoIcons.gear_alt_fill,
-                                color: controller.listNumberActiveIcon.value == 1 ? Colors.white : Color(0xFF5F33E1),
-                              ) 
-                            ],
-                            onToggle: (index) { 
-                              controller.updatelistNumberActiveIcon(index); 
-                            },
-                          )
-                        )  
+                  borderRadius: BorderRadius.all(Radius.circular(5))
+                ),child: Padding(
+                    padding: EdgeInsets.all(10),
+                    child: Row(
+                    children: [
+                      Text("0"),
+                      Expanded(
+                        child: Slider(
+                          value: 10,
+                          min: 10,
+                          max: 100, 
+                          onChanged: (double value) => {
+                          }
+                        ),
                       ),
-                    ),
-                ), 
-              ),  
+                      Text("100") 
+                    ],
+                  ),
+                ),
+              ),
           // enalbe duplicate number
               SizedBox(height: 10),     
               Text("Enable Duplicate Number"),
@@ -217,24 +200,22 @@ class Home extends StatelessWidget {
               ),
               SizedBox(height: 20),
               Center(
-                  child: Container(
-                decoration: BoxDecoration(
-                  color: Color(0xFF5F33E1),
-                  borderRadius: BorderRadius.circular(5),
-                ),
-                width: double.infinity,
-                child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.transparent,
-                    shadowColor: Colors.transparent,
-                  ),
-                  onPressed: () { 
-                    controller.startRandomNumber();
-                  },
-                  child: Text(
-                    'Start',
-                    style: TextStyle(color: Colors.white, fontSize: 20),
-                  ),
+                child: Container(
+                  width: double.infinity,
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Color(0xFF5F33E1),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(5), // Adjust radius as needed
+                      ),
+                    ),
+                    onPressed: () { 
+                      controller.startRandomNumber();
+                    },
+                    child: Text(
+                      'Start',
+                      style: TextStyle(color: Colors.white, fontSize: 20),
+                    ),
                 ),
               ))
             ],

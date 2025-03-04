@@ -2,6 +2,7 @@ import 'dart:math';
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:random_number_app/views/page/setting.dart';
 
 class Randomcontroller extends GetxController {
@@ -9,53 +10,86 @@ class Randomcontroller extends GetxController {
 
   // active button list number
   var listNumberActiveIcon = 0.obs;
-  void updatelistNumberActiveIcon(index){ 
-    listNumberActiveIcon.value = index;
-    if(listNumberActiveIcon.value == 1) {
-      alertCustomListNumber();
-    }
-  }
+  // void updatelistNumberActiveIcon(index){ 
+  //   listNumberActiveIcon.value = index;
+  //   if(listNumberActiveIcon.value == 1) {
+  //     alertCustomListNumber();
+  //   }
+  // }
 
-  void alertCustomListNumber () {
-    Get.defaultDialog(
-      backgroundColor: Colors.white,
-      title: "Alert",
-      middleText: "This is", 
-      buttonColor:Color(0xFF5F33E1),
-      cancelTextColor: Color(0xFF5F33E1),
-      radius: 5,
-      
-      confirm: Container( 
-        decoration: BoxDecoration(
-          color: Color(0xFF5F33E1), // Button background color
-          borderRadius: BorderRadius.circular(5), // Border radius for button
-        ),
-        child: TextButton(
-          onPressed: () {
-            print("hello");
-          },
-          child: Text(
-            "Confirm",
-            style: TextStyle(color: Colors.white),
-          ),
-        ),
-      ),
-      cancel: Container( 
-        decoration: BoxDecoration(
-          color: Color(0xFFEDE8FF), // Button background color
-          borderRadius: BorderRadius.circular(5), // Border radius for button
-        ),
-        child: TextButton(
-          onPressed: () {
-            Get.back();
-          },
-          child: Text(
-            "Cancel",
-            style: TextStyle(color: Color(0xFF5F33E1)),
-          ),
-        ),
-      )
-    ); 
+  RxDouble minSlider = 1.0.obs;
+  RxDouble maxSlider = 100.0.obs;
+  RxDouble _valueSlider = 1.0.obs; 
+  RxInt dividerSlide = 100.obs;
+  // alert customer list number
+  // void alertCustomListNumber() {
+  //   Get.defaultDialog(
+  //     backgroundColor: Colors.white, 
+  //     title:"How many list number?",
+  //     titleStyle: TextStyle(
+  //       fontSize: 15
+  //     ),
+  //     content: Column( 
+  //       mainAxisAlignment: MainAxisAlignment.center,
+  //       children: [
+  //         Row(
+  //           children: [
+  //             Text("1", style: GoogleFonts.mandali(fontSize: 15) ),
+  //             Expanded(
+  //               child: Obx(() =>  Slider(
+  //                 value: _valueSlider.value,
+  //                 min: minSlider.value,
+  //                 max: maxSlider.value,
+  //                 divisions: dividerSlide.value,
+  //                 label: _valueSlider.round().toString(),
+  //                 onChanged: (double newValue) { 
+  //                     upateSlider(newValue);
+  //                 },
+  //               ),)
+  //             ),
+  //             Text("100", style: GoogleFonts.mandali(fontSize: 15) ),
+  //           ],
+  //         ),
+  //         Row(
+  //            children: [
+  //               Expanded(
+  //                 child: ElevatedButton(
+  //                   style: ElevatedButton.styleFrom(
+  //                     backgroundColor: Color(0xFFEDE8FF),
+  //                     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5) ),
+  //                   ),
+  //                   onPressed: () => {
+
+  //                       _valueSlider.value = 1.0,Get.back(),
+  //                   }, 
+  //                   child: Text("Cancel",style: TextStyle(color: Color(0xFF5F33E1)),
+  //                   )
+  //                 ),
+  //               ),
+  //               SizedBox(width: 10),
+  //               Expanded(
+  //                 child: ElevatedButton(
+  //                   style: ElevatedButton.styleFrom(
+  //                     backgroundColor: Color(0xFF5F33E1),
+  //                     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5),),
+  //                   ),
+  //                   onPressed: () => {
+  //                     Get.back(),
+  //                   }, 
+  //                   child: Text("Confirm",style: TextStyle(color: Colors.white),
+  //                   )
+  //                 ),
+  //               ),
+  //             ],
+  //         ),
+  //       ],
+  //     ), 
+  //     radius: 5,
+  //   );
+  // }
+  // update slider value 
+  void upateSlider(double value){
+    _valueSlider.value = value; 
   }
 
   // active enable duplicate number
@@ -63,7 +97,6 @@ class Randomcontroller extends GetxController {
   void updateEnableDuplicateNumber(index){
     enableDuplicateNumber.value = index;
   }
-
 
   final min = TextEditingController(text: "1");
   final max = TextEditingController(text: "100");
@@ -103,14 +136,24 @@ class Randomcontroller extends GetxController {
       max.text = "$minimum";
       min.text = "$maximum";
     }
-    animateRandom();
-    random(minimum, maximum);
+
+    int numberList = _valueSlider.value.toInt(); 
+    if(numberList >= 1){
+      for (var i = 1; i < numberList; i++) {
+        random(minimum, maximum);
+      }
+    } else {
+      animateRandom();
+      random(minimum, maximum);
+    }
   }
 
   void random(minimum, maximum) {
     var rng = minimum + Random().nextInt(maximum - minimum + 1);
     result.value = rng.toString();
+    print(rng);
   }
+
 
   void animateRandom() {
     _timer?.cancel();
