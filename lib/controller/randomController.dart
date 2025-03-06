@@ -9,19 +9,16 @@ class Randomcontroller extends GetxController {
 
   // active button list number
   var listNumberActiveIcon = 0.obs;
+  final min = TextEditingController(text: "1");
+  final max = TextEditingController(text: "100");
+  int minimum = 1;
+  int maximum = 100;
 
   // active enable duplicate number
   var enableDuplicateNumber = 0.obs;
   void updateEnableDuplicateNumber(index) {
     enableDuplicateNumber.value = index;
-    print(index);
   }
-
-  final min = TextEditingController(text: "1");
-  final max = TextEditingController(text: "100");
-
-  int minimum = 1;
-  int maximum = 100;
 
   RxString result = "1".obs;
 
@@ -35,11 +32,7 @@ class Randomcontroller extends GetxController {
     update();
   }
 
-  void setting() {
-    Get.to(() => Setting_page());
-  }
-
-  void refresh() {
+  void reset() {
     min.text = "1";
     max.text = "100";
     minimum = 1;
@@ -47,20 +40,52 @@ class Randomcontroller extends GetxController {
     result.value = "1";
   }
 
-  void startRandomNumber() {
+  /*START RANDOM NUMBER*/
+  void randomNumber() {
+    if (min.text.trim().isEmpty) {
+      min.text = "1";
+    }
+    if (max.text.trim().isEmpty) {
+      max.text = "100";
+    }
     minimum = int.parse(min.text);
     maximum = int.parse(max.text);
-
-    if (minimum > maximum) {
-      max.text = "$minimum";
-      min.text = "$maximum";
-    } else if (enableDuplicateNumber.value == 1) {
-      randomNoDuplicateNumber(minimum, maximum);
+    if (maximum > 100000000) {
+      Get.defaultDialog();
+    } else if (minimum < 1) {
+      min.text = "1";
     } else {
-      random(minimum, maximum);
+      if (minimum > maximum) {
+        max.text = "$minimum";
+        min.text = "$maximum";
+      } else if (enableDuplicateNumber.value == 1) {
+        randomNoDuplicateNumber(minimum, maximum);
+      } else {
+        random(minimum, maximum);
+      }
     }
-  }
 
+    // ignore: unnecessary_null_comparison
+    // if (minimum == null) {
+    //   min;
+    //   // ignore: unnecessary_null_comparison
+    // } else if (maximum == null) {
+    //   maximum = 100;
+    // } else if (maximum > 100000000) {
+    //   Get.defaultDialog();
+    // }
+    // if (minimum > maximum) {
+    //   max.text = "$minimum";
+    //   min.text = "$maximum";
+    // } else if (enableDuplicateNumber.value == 1) {
+    //   randomNoDuplicateNumber(minimum, maximum);
+    // } else {
+    //   random(minimum, maximum);
+    // }
+  }
+  /*END*/
+
+  /*START RANDOM NUMBER WITH DUPLICATE NUMBER*/
   void random(minimum, maximum) {
     _timer?.cancel();
     _timer = Timer.periodic(Duration(milliseconds: 10), (timer) {
@@ -72,12 +97,14 @@ class Randomcontroller extends GetxController {
       result.value = "${minimum + Random().nextInt(maximum - minimum + 1)}";
     });
   }
+  /*END*/
 
-  void randomNoDuplicateNumber(minimum, maximum) {
+  /*START RANDOM NUMBER WITHOUT DUPLICATE NUMBER*/
+  void randomNoDuplicateNumber(int minimum, int maximum) {
     var rng = Random();
     int totalUniqueNumbers = maximum - minimum + 1;
 
-    if (_generatedNumbers.length == totalUniqueNumbers) {
+    if (_generatedNumbers.length >= totalUniqueNumbers) {
       Get.defaultDialog(
         title: "All numbers have been generated",
         barrierDismissible: false,
@@ -90,7 +117,7 @@ class Randomcontroller extends GetxController {
                 size: 80,
                 color: Color(0xFF5F33E1),
               ),
-              SizedBox( height: 20), 
+              SizedBox(height: 20),
               Row(
                 children: [
                   Expanded(
@@ -98,8 +125,7 @@ class Randomcontroller extends GetxController {
                       style: ElevatedButton.styleFrom(
                           backgroundColor: Color(0xFFEDE8FF),
                           shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(5)
-                      )),
+                              borderRadius: BorderRadius.circular(5))),
                       child: Text("Close"),
                       onPressed: () {
                         Get.back();
@@ -123,6 +149,8 @@ class Randomcontroller extends GetxController {
                       ),
                       label: Text("Again"),
                       onPressed: () {
+                        _generatedNumbers
+                            .clear(); // Reset the generated numbers list
                         Get.back();
                         FocusScope.of(Get.context!).unfocus();
                       },
@@ -133,9 +161,8 @@ class Randomcontroller extends GetxController {
             ],
           ),
         ),
-        radius: 5, 
+        radius: 5,
       );
-
       return;
     }
 
@@ -151,6 +178,7 @@ class Randomcontroller extends GetxController {
       int randomDuringAnimation = minimum + rng.nextInt(maximum - minimum + 1);
       result.value = randomDuringAnimation.toString();
     });
+
     Future.delayed(Duration(seconds: 1), () {
       _timer?.cancel();
       result.value = rngNumber.toString();
@@ -158,10 +186,5 @@ class Randomcontroller extends GetxController {
 
     print(result.value);
   }
-
-  @override
-  void onClose() {
-    // TODO: implement onClose
-    super.onClose();
-  }
+  /*END*/
 }

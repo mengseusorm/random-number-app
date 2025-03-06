@@ -164,7 +164,7 @@ class Home extends StatelessWidget {
                           ),
                         ),
                         onPressed: () { 
-                          controller.startRandomNumber();
+                          controller.randomNumber();
                         },
                         child: Text(
                           'Generate',
