@@ -1,17 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:random_number_app/controller/randomHistoryController.dart';
 
 class History extends StatelessWidget {
-  const History({super.key});
+  
+  final Randomhistorycontroller controller = Get.put(Randomhistorycontroller());
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
         title: Text("History"),
       ),
-      body:Container( 
+      body:Container(  
         child: ListView.builder(
-          itemCount: 30,
+          itemCount: controller.history.length,
           itemBuilder: (context ,index) {
             return Padding(
                 padding: EdgeInsets.all(20),
@@ -22,7 +26,7 @@ class History extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          "1111111111111",
+                          controller.history[index],
                           style: TextStyle(
                             fontSize: 17,
                           ),

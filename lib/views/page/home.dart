@@ -9,7 +9,6 @@ import 'package:toggle_switch/toggle_switch.dart';
 class Home extends StatelessWidget {
   final Randomcontroller controller = Get.put(Randomcontroller());
   
-  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,7 +26,7 @@ class Home extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   // enalbe duplicate number
-                  SizedBox(height: 10),     
+                  SizedBox(height: 20),     
                   Text("Enable Duplicate Number"),
                   SizedBox(height: 10), 
                   Card(
@@ -73,7 +72,7 @@ class Home extends StatelessWidget {
                     ), 
                   ),  
                   // short number 
-                  SizedBox(height: 10),  
+                  SizedBox(height: 20),  
                   Text("How many numbers?"),
                   SizedBox(height: 10), 
                   Row(

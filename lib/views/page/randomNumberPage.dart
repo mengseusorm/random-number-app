@@ -6,7 +6,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:random_number_app/controller/randomController.dart'; 
 import 'package:random_number_app/views/page/history.dart';
 import 'package:random_number_app/views/page/home.dart';
-import 'package:random_number_app/views/page/setting.dart'; 
 class Randomnumberpage extends StatefulWidget {
   @override
   _RandomnumberpageState createState() => _RandomnumberpageState();
@@ -44,7 +43,7 @@ class _RandomnumberpageState extends State<Randomnumberpage> {
         centerTitle: true,
         leading: IconButton(
           onPressed: () => {
-            controller.refresh()
+            controller.reset()
           },
           icon: Icon(
             Icons.restart_alt
